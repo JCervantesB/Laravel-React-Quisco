@@ -4,7 +4,6 @@ import SubMenu from "./SubMenu"
 
 export default function AdminSidebar() {
     const { logout, user } = useAuth({middleware: 'auth'});
-    console.log(user);
   return (
     <aside className="md:w-72 md:h-screen">
         <div className="p-4">

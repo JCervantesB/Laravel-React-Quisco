@@ -9,6 +9,7 @@ const QuioscoProvider = ({children}) => {
     const [categorias, setCategorias] = useState([]);
     const [categoriaActual, setCategoriaActual] = useState({});
     const [modal, setModal] = useState(false);
+    const [nuevoProductoModal, setNuevoProductoModal] = useState(false);
     const [producto, setProducto] = useState({});
     const [pedido, setPedido] = useState([]);
     const [total, setTotal] = useState(0);
@@ -45,6 +46,10 @@ const QuioscoProvider = ({children}) => {
 
     const handleClickModal = () => {
         setModal(!modal);
+    }
+
+    const handleClickNuevoProductoModal = () => {
+        setNuevoProductoModal(!nuevoProductoModal);
     }
 
     const handleSetProducto = (producto) => {
@@ -156,7 +161,9 @@ const QuioscoProvider = ({children}) => {
                 total,
                 handleSubmitNuevaOrden,
                 handleClickCompletarPedido,
-                handleClickProductoAgotado
+                handleClickProductoAgotado,
+                nuevoProductoModal,
+                handleClickNuevoProductoModal
             }}
         >
             {children}

@@ -2,6 +2,7 @@ import { createRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Alerta from "../components/Alerta";
 import { useAuth } from "../hooks/useAuth";
+import Spinner from "../components/Spinner";
 
 export default function Registro() {
 
@@ -11,6 +12,7 @@ export default function Registro() {
   const passwordConfirmationRef = createRef();
 
   const [errores, setErrores] = useState([]);
+  const [cargando, setCargando] = useState(false);
   const {registro} = useAuth({middleware: 'guest', url: '/'});
 
   const handleSubmit = async (e) => {
@@ -23,7 +25,8 @@ export default function Registro() {
       password_confirmation: passwordConfirmationRef.current.value
     };
     
-    registro(datos, setErrores);
+    setCargando(true);
+    registro(datos, setErrores, setCargando);
   }
 
   return (
