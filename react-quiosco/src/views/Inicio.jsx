@@ -18,6 +18,8 @@ export default function Inicio() {
   const {data, error, isLoading} = useSWR('/api/productos', fetcher, {
     refreshInterval: 1000
   });
+
+  if(!data) return null;
   // Spinner
   if(isLoading) return (
     <Spinner />

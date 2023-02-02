@@ -4,7 +4,6 @@ import useQuiosco from "../hooks/useQuiosco";
 export default function Producto({producto, botonAgregar = false, botonDisponible = false, botonHabilitar = false}) {
     const { handleClickModal, handleSetProducto, handleClickProductoAgotado } = useQuiosco();
     const { imagen, nombre, precio, disponible } = producto;
-
   return (
     <div className="flex flex-col justify-between border p-3 shadow bg-white rounded-xl">
         <img 
