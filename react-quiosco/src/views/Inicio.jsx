@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import  useSWR  from 'swr';
 import Producto from '../components/Producto';
 import clienteAxios from '../config/axios';
@@ -18,15 +19,13 @@ export default function Inicio() {
   const {data, error, isLoading} = useSWR('/api/productos', fetcher, {
     refreshInterval: 1000
   });
-
-  if(!data) return null;
-  // Spinner
-  if(isLoading) return (
-    <Spinner />
-  )
+  
+  if (!data || isLoading) {
+    return <Spinner />;
+  }
 
   const productos = data.data.filter(producto => producto.categoria_id === categoriaActual.id && producto.disponible === 1)
- 
+   
   return (
     <>
       <h1 className='text-4xl font-black'>{categoriaActual.nombre}</h1>
