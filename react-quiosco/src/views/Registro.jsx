@@ -101,6 +101,7 @@ export default function Registro() {
             value="Crear Cuenta"
             className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 px-4 rounded-md w-full uppercase"
           />
+          {cargando ? <Spinner /> : null}
         </form>
       </div>
       <nav className="mt-5">
