@@ -1,8 +1,10 @@
 import { Link } from "react-router-dom"
 import { useAuth } from "../hooks/useAuth"
+import SubMenu from "./SubMenu"
 
 export default function AdminSidebar() {
-    const { logout } = useAuth({middleware: 'auth'})
+    const { logout, user } = useAuth({middleware: 'auth'});
+    console.log(user);
   return (
     <aside className="md:w-72 md:h-screen">
         <div className="p-4">
@@ -13,9 +15,18 @@ export default function AdminSidebar() {
             />
         </div>
         <nav className="flex flex-col p-4 gap-4 border w-full">
-            <Link to="/admin" className="font-bold text-lg hover:scale-105">Ordenes</Link>
-            <Link to="/admin/productos" className="font-bold text-lg border-t pt-3 hover:scale-105">Productos Disponibles</Link>
-            <Link to="/admin/productos/agotados" className="font-bold text-lg border-t pt-3 hover:scale-105">Productos Agotados</Link>
+            <div className="font-bold text-lg">
+            Admin: {user ? user.name : ''}
+            </div>
+            <SubMenu to="/admin" text="Ordenes" />
+            <SubMenu to="#" text="Productos">
+                <SubMenu to="/admin/productos" text="Disponibles" />
+                <SubMenu to="/admin/productos/agotados" text="Agotados" />
+            </SubMenu>
+            <SubMenu to="#" text="Usuarios">
+                <SubMenu to="/admin/usuarios" text="Todos" />
+                <SubMenu to="/admin/usuarios/administradores" text="Administradores" />
+            </SubMenu>
         </nav>
 
         <div className="my-5 px-5">

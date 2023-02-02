@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rules\Password as PasswordRules;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RegistroRequest extends FormRequest
+class RecuperarRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,27 +24,25 @@ class RegistroRequest extends FormRequest
      */
     public function rules()
     {
+        // Recuperar cuenta que contenga el recoveryToken
         return [
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'email', 'unique:users,email'],
+            'email' => 'email|exists:users,email',
+            'recoveryToken' => 'required|exists:users,recoveryToken',
             'password' => [
                 'required', 
-                'confirmed',
                 PasswordRules::min(8)
                     ->letters()
                     ->numbers()
                     ->symbols()
-            ],
+            ]
         ];
     }
 
     public function messages() 
     {
         return [
-            'name' => 'El nombre es obligatorio',
-            'email' => 'El email es obligatorio',
-            'email.email' => 'El email no es válido',
-            'email.unique' => 'El email ya está registrado',
+            'recoveryToken' => 'El token de recuperación es obligatorio',
+            'recoveryToken.exists' => 'El token de recuperación no es válido',
             'password' => 'El password debe contener al menos 8 caracteres, una letra, un número y un símbolo',
         ];
     }

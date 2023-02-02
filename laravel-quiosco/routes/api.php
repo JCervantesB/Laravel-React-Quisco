@@ -34,3 +34,7 @@ Route::middleware('auth:sanctum')->group(function() {
 // Autentificación
 Route::post('/registro', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+// Recuperar cuenta y cambiar contraseña
+Route::post('/olvide', [AuthController::class, 'olvide']);
+
+Route::post('/recuperar_cuenta', [AuthController::class, 'recuperar_cuenta']);

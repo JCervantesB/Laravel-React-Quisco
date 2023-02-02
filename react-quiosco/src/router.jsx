@@ -8,6 +8,8 @@ import Ordenes from './views/Ordenes';
 import Productos from './views/Productos';
 import ProductosAgotados from './views/ProductosAgotados';
 import Registro from './views/Registro';
+import Olvide from './views/Olvide';
+import Recuperar from './views/Recuperar';
 
 const router = createBrowserRouter([
     {
@@ -32,6 +34,15 @@ const router = createBrowserRouter([
                 path: '/auth/registro',
                 element: <Registro />
             },
+            {
+                path: '/auth/olvide',
+                element: <Olvide />
+            },
+            {
+                // Recuperar password con token enviando por email /auth/recuperar?token=123456789
+                path: '/auth/recuperar',
+                element: <Recuperar />
+            }
         ]
     },
     {

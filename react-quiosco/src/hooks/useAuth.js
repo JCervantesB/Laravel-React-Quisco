@@ -5,7 +5,7 @@ import clienteAxios from "../config/axios";
 import { toast } from "react-toastify";
 
 export const useAuth = ({middleware, url}) => {
-
+    
     const token = localStorage.getItem('AUTH_TOKEN');
     const navigate = useNavigate();
 
@@ -21,7 +21,7 @@ export const useAuth = ({middleware, url}) => {
         })
     );
 
-    const login = async (datos, setErrores) => {
+    const login = async (datos, setErrores, setCargando) => {
         try {
             const {data} = await clienteAxios.post('/api/login', datos);
             localStorage.setItem('AUTH_TOKEN', data.token);
@@ -29,6 +29,7 @@ export const useAuth = ({middleware, url}) => {
             setErrores([]);
             await mutate();
           } catch (error) {
+            setCargando(false);
             setErrores(Object.values(error.response.data.errors));
           }
     }
@@ -55,6 +56,29 @@ export const useAuth = ({middleware, url}) => {
             throw Error(error?.response?.data?.errors)
         }
     }
+    const olvide = async (datos, setErrores, setExito) => {
+        try {
+            const {data} = await clienteAxios.post('/api/olvide', datos);
+            console.log(data);
+            setExito(true);
+            setErrores([]);
+            await mutate();
+          } catch (error) {
+            setErrores(Object.values(error.response.data.errors));
+          }
+    }
+
+    const recuperar = async (datos, setErrores, setExito) => {
+        try {
+            const {data} = await clienteAxios.post('/api/recuperar_cuenta', datos);
+            console.log(data);
+            setExito(true);
+            setErrores([]);
+            await mutate();
+            } catch (error) {
+            setErrores(Object.values(error.response.data.errors));
+            }
+    }
 
     useEffect(() => {
         if(middleware === 'guest' && url && user) {
@@ -76,6 +100,8 @@ export const useAuth = ({middleware, url}) => {
         registro,
         logout,
         user,
-        error
+        error,
+        olvide,
+        recuperar
     }
 }
