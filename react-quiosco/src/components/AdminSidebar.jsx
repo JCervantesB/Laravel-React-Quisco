@@ -23,8 +23,8 @@ export default function AdminSidebar() {
                 <SubMenu to="/admin/productos/agotados" text="Agotados" />
             </SubMenu>
             <SubMenu to="#" text="Usuarios">
-                <SubMenu to="/admin/usuarios" text="Todos" />
-                <SubMenu to="/admin/usuarios/administradores" text="Administradores" />
+                <SubMenu to="/admin" text="Todos" />
+                <SubMenu to="/admin" text="Administradores" />
             </SubMenu>
         </nav>
 
